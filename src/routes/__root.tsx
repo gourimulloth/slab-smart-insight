@@ -125,8 +125,17 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col">
+        <SiteNav />
+        <main className="flex-1">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </main>
+        <footer className="border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
+          SlabSense · a student project on household energy awareness for KSEB consumers. Tariff
+          figures are indicative, not an official KSEB bill.
+        </footer>
+      </div>
     </QueryClientProvider>
   );
 }
