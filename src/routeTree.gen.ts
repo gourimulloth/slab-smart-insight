@@ -10,33 +10,143 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AppliancesRouteImport } from './routes/appliances'
+import { Route as ReferencesRouteImport } from './routes/references'
+import { Route as SimulatorRouteImport } from './routes/simulator'
+import { Route as ApiPublicSlabStatusRouteImport } from './routes/api/public/slab-status'
+import { Route as ApiPublicUsageSummaryRouteImport } from './routes/api/public/usage-summary'
+import { Route as ApiPublicBillProjectionIdRouteImport } from './routes/api/public/bill-projection.$id'
+import { Route as ApiPublicUsageHouseholdIdRouteImport } from './routes/api/public/usage.$householdId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppliancesRoute = AppliancesRouteImport.update({
+  id: '/appliances',
+  path: '/appliances',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferencesRoute = ReferencesRouteImport.update({
+  id: '/references',
+  path: '/references',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulatorRoute = SimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSlabStatusRoute = ApiPublicSlabStatusRouteImport.update({
+  id: '/api/public/slab-status',
+  path: '/api/public/slab-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicUsageSummaryRoute = ApiPublicUsageSummaryRouteImport.update({
+  id: '/api/public/usage-summary',
+  path: '/api/public/usage-summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicBillProjectionIdRoute =
+  ApiPublicBillProjectionIdRouteImport.update({
+    id: '/api/public/bill-projection/$id',
+    path: '/api/public/bill-projection/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicUsageHouseholdIdRoute =
+  ApiPublicUsageHouseholdIdRouteImport.update({
+    id: '/api/public/usage/$householdId',
+    path: '/api/public/usage/$householdId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/appliances': typeof AppliancesRoute
+  '/references': typeof ReferencesRoute
+  '/simulator': typeof SimulatorRoute
+  '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
+  '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
+  '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/appliances': typeof AppliancesRoute
+  '/references': typeof ReferencesRoute
+  '/simulator': typeof SimulatorRoute
+  '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
+  '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
+  '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/appliances': typeof AppliancesRoute
+  '/references': typeof ReferencesRoute
+  '/simulator': typeof SimulatorRoute
+  '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
+  '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
+  '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/appliances'
+    | '/references'
+    | '/simulator'
+    | '/api/public/slab-status'
+    | '/api/public/usage-summary'
+    | '/api/public/bill-projection/$id'
+    | '/api/public/usage/$householdId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/appliances'
+    | '/references'
+    | '/simulator'
+    | '/api/public/slab-status'
+    | '/api/public/usage-summary'
+    | '/api/public/bill-projection/$id'
+    | '/api/public/usage/$householdId'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/appliances'
+    | '/references'
+    | '/simulator'
+    | '/api/public/slab-status'
+    | '/api/public/usage-summary'
+    | '/api/public/bill-projection/$id'
+    | '/api/public/usage/$householdId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AppliancesRoute: typeof AppliancesRoute
+  ReferencesRoute: typeof ReferencesRoute
+  SimulatorRoute: typeof SimulatorRoute
+  ApiPublicSlabStatusRoute: typeof ApiPublicSlabStatusRoute
+  ApiPublicUsageSummaryRoute: typeof ApiPublicUsageSummaryRoute
+  ApiPublicBillProjectionIdRoute: typeof ApiPublicBillProjectionIdRoute
+  ApiPublicUsageHouseholdIdRoute: typeof ApiPublicUsageHouseholdIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +158,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/appliances': {
+      id: '/appliances'
+      path: '/appliances'
+      fullPath: '/appliances'
+      preLoaderRoute: typeof AppliancesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/references': {
+      id: '/references'
+      path: '/references'
+      fullPath: '/references'
+      preLoaderRoute: typeof ReferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/slab-status': {
+      id: '/api/public/slab-status'
+      path: '/api/public/slab-status'
+      fullPath: '/api/public/slab-status'
+      preLoaderRoute: typeof ApiPublicSlabStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/usage-summary': {
+      id: '/api/public/usage-summary'
+      path: '/api/public/usage-summary'
+      fullPath: '/api/public/usage-summary'
+      preLoaderRoute: typeof ApiPublicUsageSummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/bill-projection/$id': {
+      id: '/api/public/bill-projection/$id'
+      path: '/api/public/bill-projection/$id'
+      fullPath: '/api/public/bill-projection/$id'
+      preLoaderRoute: typeof ApiPublicBillProjectionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/usage/$householdId': {
+      id: '/api/public/usage/$householdId'
+      path: '/api/public/usage/$householdId'
+      fullPath: '/api/public/usage/$householdId'
+      preLoaderRoute: typeof ApiPublicUsageHouseholdIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AppliancesRoute: AppliancesRoute,
+  ReferencesRoute: ReferencesRoute,
+  SimulatorRoute: SimulatorRoute,
+  ApiPublicSlabStatusRoute: ApiPublicSlabStatusRoute,
+  ApiPublicUsageSummaryRoute: ApiPublicUsageSummaryRoute,
+  ApiPublicBillProjectionIdRoute: ApiPublicBillProjectionIdRoute,
+  ApiPublicUsageHouseholdIdRoute: ApiPublicUsageHouseholdIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
