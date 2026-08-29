@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppliancesRouteImport } from './routes/appliances'
 import { Route as ApiPublicSlabStatusRouteImport } from './routes/api/public/slab-status'
 import { Route as ApiPublicUsageSummaryRouteImport } from './routes/api/public/usage-summary'
 import { Route as ApiPublicBillProjectionIdRouteImport } from './routes/api/public/bill-projection.$id'
@@ -18,6 +19,11 @@ import { Route as ApiPublicUsageHouseholdIdRouteImport } from './routes/api/publ
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppliancesRoute = AppliancesRouteImport.update({
+  id: '/appliances',
+  path: '/appliances',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicSlabStatusRoute = ApiPublicSlabStatusRouteImport.update({
@@ -45,6 +51,7 @@ const ApiPublicUsageHouseholdIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/appliances': typeof AppliancesRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
   '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
@@ -52,6 +59,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/appliances': typeof AppliancesRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
   '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
@@ -60,6 +68,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/appliances': typeof AppliancesRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
   '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
@@ -69,6 +78,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/appliances'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
     | '/api/public/bill-projection/$id'
@@ -76,6 +86,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/appliances'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
     | '/api/public/bill-projection/$id'
@@ -83,6 +94,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/appliances'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
     | '/api/public/bill-projection/$id'
@@ -91,6 +103,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppliancesRoute: typeof AppliancesRoute
   ApiPublicSlabStatusRoute: typeof ApiPublicSlabStatusRoute
   ApiPublicUsageSummaryRoute: typeof ApiPublicUsageSummaryRoute
   ApiPublicBillProjectionIdRoute: typeof ApiPublicBillProjectionIdRoute
@@ -104,6 +117,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/appliances': {
+      id: '/appliances'
+      path: '/appliances'
+      fullPath: '/appliances'
+      preLoaderRoute: typeof AppliancesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/slab-status': {
@@ -139,6 +159,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppliancesRoute: AppliancesRoute,
   ApiPublicSlabStatusRoute: ApiPublicSlabStatusRoute,
   ApiPublicUsageSummaryRoute: ApiPublicUsageSummaryRoute,
   ApiPublicBillProjectionIdRoute: ApiPublicBillProjectionIdRoute,
