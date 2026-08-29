@@ -39,9 +39,6 @@ const users = [
   },
 ];
 
-export default function _unused() {
-  return null;
-}
 
 function AboutPage() {
   return (

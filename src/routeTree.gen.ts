@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as AppliancesRouteImport } from './routes/appliances'
 import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as ApiPublicSlabStatusRouteImport } from './routes/api/public/slab-status'
@@ -20,6 +21,11 @@ import { Route as ApiPublicUsageHouseholdIdRouteImport } from './routes/api/publ
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppliancesRoute = AppliancesRouteImport.update({
@@ -57,6 +63,7 @@ const ApiPublicUsageHouseholdIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/appliances': typeof AppliancesRoute
   '/simulator': typeof SimulatorRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/appliances': typeof AppliancesRoute
   '/simulator': typeof SimulatorRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
@@ -76,6 +84,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/appliances': typeof AppliancesRoute
   '/simulator': typeof SimulatorRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/appliances'
     | '/simulator'
     | '/api/public/slab-status'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/appliances'
     | '/simulator'
     | '/api/public/slab-status'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/appliances'
     | '/simulator'
     | '/api/public/slab-status'
@@ -115,6 +127,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   AppliancesRoute: typeof AppliancesRoute
   SimulatorRoute: typeof SimulatorRoute
   ApiPublicSlabStatusRoute: typeof ApiPublicSlabStatusRoute
@@ -130,6 +143,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/appliances': {
@@ -179,6 +199,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   AppliancesRoute: AppliancesRoute,
   SimulatorRoute: SimulatorRoute,
   ApiPublicSlabStatusRoute: ApiPublicSlabStatusRoute,
