@@ -59,17 +59,17 @@ export function calculateBill(units: number, slabs: TariffSlab[]): BillResult {
   let energyCharge = 0;
 
   for (const slab of ordered) {
+    // Units already covered by cheaper slabs below this one.
+    const lower = slab.min_units === 0 ? 0 : slab.min_units - 1;
     const upper = slab.max_units ?? Number.POSITIVE_INFINITY;
-    const unitsInSlab = Math.max(0, Math.min(units, upper) - (slab.min_units - 1) + (slab.min_units === 0 ? -1 : 0));
-    const chargeable = Math.max(0, Math.min(units, upper) - (slab.min_units === 0 ? 0 : slab.min_units - 1));
-    const finalUnits = slab.min_units === 0 ? Math.max(0, Math.min(units, upper)) : chargeable;
-    void unitsInSlab;
-    if (finalUnits <= 0) continue;
-    const amount = finalUnits * slab.rate_per_unit;
+    const unitsInSlab = Math.max(0, Math.min(units, upper) - lower);
+    if (unitsInSlab <= 0) continue;
+
+    const amount = unitsInSlab * slab.rate_per_unit;
     energyCharge += amount;
     breakdown.push({
       label: slab.label,
-      units: round2(finalUnits),
+      units: round2(unitsInSlab),
       rate: slab.rate_per_unit,
       amount: round2(amount),
     });
