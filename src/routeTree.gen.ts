@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicUsageSummaryRouteImport } from './routes/api/public/usage-summary'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicUsageSummaryRoute = ApiPublicUsageSummaryRouteImport.update({
+  id: '/api/public/usage-summary',
+  path: '/api/public/usage-summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/public/usage-summary'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/public/usage-summary'
+  id: '__root__' | '/' | '/api/public/usage-summary'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicUsageSummaryRoute: typeof ApiPublicUsageSummaryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/usage-summary': {
+      id: '/api/public/usage-summary'
+      path: '/api/public/usage-summary'
+      fullPath: '/api/public/usage-summary'
+      preLoaderRoute: typeof ApiPublicUsageSummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicUsageSummaryRoute: ApiPublicUsageSummaryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
