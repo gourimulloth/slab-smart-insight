@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AppliancesRouteImport } from './routes/appliances'
+import { Route as ReferencesRouteImport } from './routes/references'
 import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as ApiPublicSlabStatusRouteImport } from './routes/api/public/slab-status'
 import { Route as ApiPublicUsageSummaryRouteImport } from './routes/api/public/usage-summary'
@@ -31,6 +32,11 @@ const AboutRoute = AboutRouteImport.update({
 const AppliancesRoute = AppliancesRouteImport.update({
   id: '/appliances',
   path: '/appliances',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferencesRoute = ReferencesRouteImport.update({
+  id: '/references',
+  path: '/references',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SimulatorRoute = SimulatorRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/appliances': typeof AppliancesRoute
+  '/references': typeof ReferencesRoute
   '/simulator': typeof SimulatorRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/appliances': typeof AppliancesRoute
+  '/references': typeof ReferencesRoute
   '/simulator': typeof SimulatorRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/appliances': typeof AppliancesRoute
+  '/references': typeof ReferencesRoute
   '/simulator': typeof SimulatorRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/appliances'
+    | '/references'
     | '/simulator'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/appliances'
+    | '/references'
     | '/simulator'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/appliances'
+    | '/references'
     | '/simulator'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AppliancesRoute: typeof AppliancesRoute
+  ReferencesRoute: typeof ReferencesRoute
   SimulatorRoute: typeof SimulatorRoute
   ApiPublicSlabStatusRoute: typeof ApiPublicSlabStatusRoute
   ApiPublicUsageSummaryRoute: typeof ApiPublicUsageSummaryRoute
@@ -157,6 +170,13 @@ declare module '@tanstack/react-router' {
       path: '/appliances'
       fullPath: '/appliances'
       preLoaderRoute: typeof AppliancesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/references': {
+      id: '/references'
+      path: '/references'
+      fullPath: '/references'
+      preLoaderRoute: typeof ReferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/simulator': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AppliancesRoute: AppliancesRoute,
+  ReferencesRoute: ReferencesRoute,
   SimulatorRoute: SimulatorRoute,
   ApiPublicSlabStatusRoute: ApiPublicSlabStatusRoute,
   ApiPublicUsageSummaryRoute: ApiPublicUsageSummaryRoute,
