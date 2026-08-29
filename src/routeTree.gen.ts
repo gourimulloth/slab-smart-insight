@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicSlabStatusRouteImport } from './routes/api/public/slab-status'
 import { Route as ApiPublicUsageSummaryRouteImport } from './routes/api/public/usage-summary'
+import { Route as ApiPublicBillProjectionIdRouteImport } from './routes/api/public/bill-projection.$id'
 import { Route as ApiPublicUsageHouseholdIdRouteImport } from './routes/api/public/usage.$householdId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,12 @@ const ApiPublicUsageSummaryRoute = ApiPublicUsageSummaryRouteImport.update({
   path: '/api/public/usage-summary',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicBillProjectionIdRoute =
+  ApiPublicBillProjectionIdRouteImport.update({
+    id: '/api/public/bill-projection/$id',
+    path: '/api/public/bill-projection/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicUsageHouseholdIdRoute =
   ApiPublicUsageHouseholdIdRouteImport.update({
     id: '/api/public/usage/$householdId',
@@ -40,12 +47,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
   '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
   '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRoutesById {
@@ -53,6 +62,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/bill-projection/$id': typeof ApiPublicBillProjectionIdRoute
   '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRouteTypes {
@@ -61,18 +71,21 @@ export interface FileRouteTypes {
     | '/'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
+    | '/api/public/bill-projection/$id'
     | '/api/public/usage/$householdId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
+    | '/api/public/bill-projection/$id'
     | '/api/public/usage/$householdId'
   id:
     | '__root__'
     | '/'
     | '/api/public/slab-status'
     | '/api/public/usage-summary'
+    | '/api/public/bill-projection/$id'
     | '/api/public/usage/$householdId'
   fileRoutesById: FileRoutesById
 }
@@ -80,6 +93,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiPublicSlabStatusRoute: typeof ApiPublicSlabStatusRoute
   ApiPublicUsageSummaryRoute: typeof ApiPublicUsageSummaryRoute
+  ApiPublicBillProjectionIdRoute: typeof ApiPublicBillProjectionIdRoute
   ApiPublicUsageHouseholdIdRoute: typeof ApiPublicUsageHouseholdIdRoute
 }
 
@@ -106,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicUsageSummaryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/bill-projection/$id': {
+      id: '/api/public/bill-projection/$id'
+      path: '/api/public/bill-projection/$id'
+      fullPath: '/api/public/bill-projection/$id'
+      preLoaderRoute: typeof ApiPublicBillProjectionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/usage/$householdId': {
       id: '/api/public/usage/$householdId'
       path: '/api/public/usage/$householdId'
@@ -120,6 +141,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiPublicSlabStatusRoute: ApiPublicSlabStatusRoute,
   ApiPublicUsageSummaryRoute: ApiPublicUsageSummaryRoute,
+  ApiPublicBillProjectionIdRoute: ApiPublicBillProjectionIdRoute,
   ApiPublicUsageHouseholdIdRoute: ApiPublicUsageHouseholdIdRoute,
 }
 export const routeTree = rootRouteImport
