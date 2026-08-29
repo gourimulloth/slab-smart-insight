@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicSlabStatusRouteImport } from './routes/api/public/slab-status'
 import { Route as ApiPublicUsageSummaryRouteImport } from './routes/api/public/usage-summary'
+import { Route as ApiPublicUsageHouseholdIdRouteImport } from './routes/api/public/usage.$householdId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,58 @@ const ApiPublicUsageSummaryRoute = ApiPublicUsageSummaryRouteImport.update({
   path: '/api/public/usage-summary',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicUsageHouseholdIdRoute =
+  ApiPublicUsageHouseholdIdRouteImport.update({
+    id: '/api/public/usage/$householdId',
+    path: '/api/public/usage/$householdId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
+  '/api/public/usage/$householdId': typeof ApiPublicUsageHouseholdIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/slab-status' | '/api/public/usage-summary'
+  fullPaths:
+    | '/'
+    | '/api/public/slab-status'
+    | '/api/public/usage-summary'
+    | '/api/public/usage/$householdId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/slab-status' | '/api/public/usage-summary'
-  id: '__root__' | '/' | '/api/public/slab-status' | '/api/public/usage-summary'
+  to:
+    | '/'
+    | '/api/public/slab-status'
+    | '/api/public/usage-summary'
+    | '/api/public/usage/$householdId'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/public/slab-status'
+    | '/api/public/usage-summary'
+    | '/api/public/usage/$householdId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiPublicSlabStatusRoute: typeof ApiPublicSlabStatusRoute
   ApiPublicUsageSummaryRoute: typeof ApiPublicUsageSummaryRoute
+  ApiPublicUsageHouseholdIdRoute: typeof ApiPublicUsageHouseholdIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +106,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicUsageSummaryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/usage/$householdId': {
+      id: '/api/public/usage/$householdId'
+      path: '/api/public/usage/$householdId'
+      fullPath: '/api/public/usage/$householdId'
+      preLoaderRoute: typeof ApiPublicUsageHouseholdIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +120,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiPublicSlabStatusRoute: ApiPublicSlabStatusRoute,
   ApiPublicUsageSummaryRoute: ApiPublicUsageSummaryRoute,
+  ApiPublicUsageHouseholdIdRoute: ApiPublicUsageHouseholdIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
