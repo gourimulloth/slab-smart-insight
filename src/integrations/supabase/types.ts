@@ -14,7 +14,145 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appliances: {
+        Row: {
+          always_on: boolean
+          category: string
+          created_at: string
+          hours_per_day: number
+          household_id: string
+          id: string
+          name: string
+          standby_watts: number
+          watts: number
+        }
+        Insert: {
+          always_on?: boolean
+          category?: string
+          created_at?: string
+          hours_per_day?: number
+          household_id: string
+          id?: string
+          name: string
+          standby_watts?: number
+          watts: number
+        }
+        Update: {
+          always_on?: boolean
+          category?: string
+          created_at?: string
+          hours_per_day?: number
+          household_id?: string
+          id?: string
+          name?: string
+          standby_watts?: number
+          watts?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appliances_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      households: {
+        Row: {
+          city: string
+          connection_type: string
+          consumer_number: string
+          created_at: string
+          cycle_start_day: number
+          id: string
+          name: string
+        }
+        Insert: {
+          city?: string
+          connection_type?: string
+          consumer_number: string
+          created_at?: string
+          cycle_start_day?: number
+          id?: string
+          name: string
+        }
+        Update: {
+          city?: string
+          connection_type?: string
+          consumer_number?: string
+          created_at?: string
+          cycle_start_day?: number
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      meter_readings: {
+        Row: {
+          created_at: string
+          household_id: string
+          id: string
+          night_units: number
+          reading_date: string
+          units_used: number
+        }
+        Insert: {
+          created_at?: string
+          household_id: string
+          id?: string
+          night_units?: number
+          reading_date: string
+          units_used: number
+        }
+        Update: {
+          created_at?: string
+          household_id?: string
+          id?: string
+          night_units?: number
+          reading_date?: string
+          units_used?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "meter_readings_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tariff_slabs: {
+        Row: {
+          fixed_charge: number
+          id: string
+          label: string
+          max_units: number | null
+          min_units: number
+          rate_per_unit: number
+          slab_order: number
+        }
+        Insert: {
+          fixed_charge?: number
+          id?: string
+          label: string
+          max_units?: number | null
+          min_units: number
+          rate_per_unit: number
+          slab_order: number
+        }
+        Update: {
+          fixed_charge?: number
+          id?: string
+          label?: string
+          max_units?: number | null
+          min_units?: number
+          rate_per_unit?: number
+          slab_order?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
