@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicSlabStatusRouteImport } from './routes/api/public/slab-status'
 import { Route as ApiPublicUsageSummaryRouteImport } from './routes/api/public/usage-summary'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSlabStatusRoute = ApiPublicSlabStatusRouteImport.update({
+  id: '/api/public/slab-status',
+  path: '/api/public/slab-status',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicUsageSummaryRoute = ApiPublicUsageSummaryRouteImport.update({
@@ -25,27 +31,31 @@ const ApiPublicUsageSummaryRoute = ApiPublicUsageSummaryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/slab-status': typeof ApiPublicSlabStatusRoute
   '/api/public/usage-summary': typeof ApiPublicUsageSummaryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/usage-summary'
+  fullPaths: '/' | '/api/public/slab-status' | '/api/public/usage-summary'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/usage-summary'
-  id: '__root__' | '/' | '/api/public/usage-summary'
+  to: '/' | '/api/public/slab-status' | '/api/public/usage-summary'
+  id: '__root__' | '/' | '/api/public/slab-status' | '/api/public/usage-summary'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicSlabStatusRoute: typeof ApiPublicSlabStatusRoute
   ApiPublicUsageSummaryRoute: typeof ApiPublicUsageSummaryRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/slab-status': {
+      id: '/api/public/slab-status'
+      path: '/api/public/slab-status'
+      fullPath: '/api/public/slab-status'
+      preLoaderRoute: typeof ApiPublicSlabStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/usage-summary': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicSlabStatusRoute: ApiPublicSlabStatusRoute,
   ApiPublicUsageSummaryRoute: ApiPublicUsageSummaryRoute,
 }
 export const routeTree = rootRouteImport
