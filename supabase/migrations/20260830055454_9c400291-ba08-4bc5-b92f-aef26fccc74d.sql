@@ -1,0 +1,1 @@
+UPDATE public.households SET name = 'A Family @ Kakkanad' WHERE id = '11111111-1111-1111-1111-111111111111';
