@@ -41,10 +41,14 @@ function round2(n: number) {
 /** Which slab does this month's total consumption fall into? */
 export function findSlab(units: number, slabs: TariffSlab[]): TariffSlab {
   const ordered = [...slabs].sort((a, b) => a.slab_order - b.slab_order);
-  return (
-    ordered.find((s) => units >= s.min_units && (s.max_units === null || units <= s.max_units)) ??
-    ordered[ordered.length - 1]
+  const match = ordered.find(
+    (s) => units >= s.min_units && (s.max_units === null || units <= s.max_units),
   );
+  const last = ordered[ordered.length - 1];
+  if (!match && !last) {
+    throw new Error("No tariff slabs configured");
+  }
+  return (match ?? last) as TariffSlab;
 }
 
 /**
