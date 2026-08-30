@@ -161,8 +161,8 @@ function Card({
 }: {
   label: string;
   value: string;
-  tone?: string;
-  small?: boolean;
+  tone?: string | undefined;
+  small?: boolean | undefined;
 }) {
   return (
     <div className="rounded-xl border border-border bg-secondary/30 p-4">

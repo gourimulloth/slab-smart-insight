@@ -124,7 +124,7 @@ function AppliancesPage() {
   );
 }
 
-function Metric({ label, value, tone }: { label: string; value: string; tone?: string }) {
+function Metric({ label, value, tone }: { label: string; value: string; tone?: string | undefined }) {
   return (
     <div>
       <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
